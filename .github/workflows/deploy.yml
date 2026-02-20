@@ -27,6 +27,7 @@ jobs:
           snow --version
           snow connection test -x --temporary-connection
           snow sql -q "SELECT CURRENT_USER(), CURRENT_ROLE(), CURRENT_WAREHOUSE();" --temporary-connection
+          snow sql -q "ALTER GIT REPOSITORY UTIL_DB.DEVOPS.SF_REPO FETCH;" --temporary-connection
           
       - name: Deploy (run SQL from repo)
         env:
@@ -36,5 +37,4 @@ jobs:
           SNOWFLAKE_ROLE: ${{ secrets.SNOWFLAKE_ROLE }}
           SNOWFLAKE_PRIVATE_KEY_RAW: ${{ secrets.SNOWFLAKE_PRIVATE_KEY_RAW }}
         run: |
-          snow sql -f snowflake/ddl/002_create_table_poc.sql  
-          snow sql -q "ALTER GIT REPOSITORY UTIL_DB.DEVOPS.SF_REPO FETCH;" --temporary-connection 
+          snow sql -f snowflake/ddl/002_create_table_poc.sql  --temporary-connection
