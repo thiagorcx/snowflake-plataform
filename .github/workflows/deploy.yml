@@ -36,5 +36,5 @@ jobs:
           SNOWFLAKE_ROLE: ${{ secrets.SNOWFLAKE_ROLE }}
           SNOWFLAKE_PRIVATE_KEY_RAW: ${{ secrets.SNOWFLAKE_PRIVATE_KEY_RAW }}
         run: |
-          snow sql -f snowflake/ddl/002_create_table_poc.sql  --temporary-connection
-          snow sql -f ALTER GIT REPOSITORY UTIL_DB.DEVOPS.SF_REPO FETCH
+          snow sql -f snowflake/ddl/002_create_table_poc.sql  
+          snow sql -q "ALTER GIT REPOSITORY UTIL_DB.DEVOPS.SF_REPO FETCH;" --temporary-connection 
